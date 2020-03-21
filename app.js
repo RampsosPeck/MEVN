@@ -6,7 +6,11 @@ import path  from 'path';
 const app = express();
 //Conection to base de datos mongo db
 const mongoose = require('mongoose');
-const uri = 'mongodb://localhost:27017/udemymevn';
+//Conexión LOCAL
+//const uri = 'mongodb://localhost:27017/udemymevn';
+//Conexión en la nube
+const uri = 'mongodb+srv://user_mevn:Ja2JecSNQ3SkVyXC@mevn-9zteq.mongodb.net/mevn?retryWrites=true&w=majority';
+
 const options = {
   useNewUrlParser: true,
   useUnifiedTopology: true,

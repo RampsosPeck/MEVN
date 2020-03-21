@@ -20,13 +20,16 @@
     "babel-loader": "^8.0.6",
     "babel-preset-env": "^1.7.0",
     "babel-register": "^6.26.0",
+    "bootstrap": "^4.4.1",
+    "bootstrap-vue": "^2.7.0",
     "connect-history-api-fallback": "^1.6.0",
     "cors": "^2.8.5",
     "express": "^4.17.1",
     "gulp-babel": "^8.0.0",
     "mongoose": "^5.9.5",
     "morgan": "^1.9.1",
-    "nodemon": "^2.0.2"
+    "nodemon": "^2.0.2",
+    "vue": "^2.6.11"
   },
   "devDependencies": {
     "@babel/cli": "^7.8.4",
