@@ -4,9 +4,13 @@ const router = express.Router();
 //importar el modelo nota
 import Nota from '../models/nota';
 
+const {verificarAuth, verificarAdministrador} = require('../middlewares/autenticacion')
+
+
 //Agregar nota
-router.post('/nueva-nota', async(req, res) => {
+router.post('/nueva-nota', verificarAuth, async(req, res) => {
 	const body = req.body;
+	body.usuarioId = req.usuario._id;
 	try{
 		const notaDB = await Nota.create(body);
 		res.status(200).json(notaDB);
@@ -34,9 +38,11 @@ router.get('/nota/:id', async(req, res)=>{
 });
 
 //Get con todos los documentos
-router.get('/nota', async(req, res)=>{
+router.get('/nota', verificarAuth, async(req, res)=>{
+
+	const usuarioId = req.usuario._id;
 	try{
-		const notaDB = await Nota.find();
+		const notaDB = await Nota.find({usuarioId});
 		res.json(notaDB);
 	}catch(error){
 		return res.status(400).json({
