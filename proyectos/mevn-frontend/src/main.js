@@ -12,7 +12,12 @@ import axios from 'axios'
 import VueAxios from 'vue-axios'
 Vue.use(VueAxios, axios)
 
-axios.defaults.baseURL = 'http://localhost:3000/api'
+//Conectado a servidor local
+//axios.defaults.baseURL = 'http://localhost:3000/api'
+
+//Conectando a servidor en la nube heroku
+axios.defaults.baseURL = 'https://mevnudemy.herokuapp.com/api'
+
 
 Vue.config.productionTip = false
 

@@ -123,7 +123,7 @@
 			eliminarNota(id){
 				this.axios.delete(`/nota/${id}`)
 				.then(res => {
-					console.log(res);
+					//console.log(res);
 					//el que sea igual a eso va a retornar su index y guardada en index
 					const index = this.notas.findIndex(item => item._id === res.data._id)
 					this.notas.splice(index,1)
@@ -136,7 +136,7 @@
 			},
 			activarEdicion(id){
 				this.editar = true;
-				console.log(id)
+				//console.log(id)
 				this.axios.get(`/nota/${id}`)
 				.then(res => {
 					this.notaEditar= res.data
