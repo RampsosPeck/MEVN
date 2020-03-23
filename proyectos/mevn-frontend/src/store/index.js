@@ -9,7 +9,7 @@ Vue.use(Vuex)
 
 export default new Vuex.Store({
   state: {
-  	token: '',
+  	token:  localStorage.getItem('token') || '',
   	usuarioDB: ''
   },
   mutations: {
@@ -19,7 +19,7 @@ export default new Vuex.Store({
   			state.usuarioDB = ''
   		}else{
   			state.usuarioDB = decode(payload);
-  			router.push({name:'notas'})
+  			//router.push({name:'notas'})
   		}
   	}
   },

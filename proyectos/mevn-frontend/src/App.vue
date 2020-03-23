@@ -2,7 +2,7 @@
   <div id="app">
     <div>
         <b-navbar toggleable="md" type="dark" variant="info">
-          <b-navbar-brand href="#">APPTAREAS</b-navbar-brand>
+          <b-navbar-brand href="#">AppJOPE</b-navbar-brand>
 
           <b-navbar-toggle target="nav-collapse"></b-navbar-toggle>
 
@@ -18,7 +18,7 @@
             <b-navbar-nav class="ml-auto">
               <b-nav-form>
                 <b-form-input size="sm" class="mr-sm-2" placeholder="Search"></b-form-input>
-                <b-button size="sm" class="my-2 my-sm-0" type="submit">Search</b-button>
+                <b-button size="sm" class="my-2 my-sm-0 bg-success" type="submit">Search</b-button>
               </b-nav-form>
 
               <b-nav-item-dropdown right v-if="estaActivo">
@@ -34,6 +34,9 @@
         </b-navbar>
       </div>
     <router-view/>
+    <div class="footer-copyright text-center py-3">© 2020 Copyright:
+      <a href="https://www.facebook.com/jorge.peralta.3576224/"> Ing. JORGE PERALTA</a>
+    </div>
   </div>
 </template>
 

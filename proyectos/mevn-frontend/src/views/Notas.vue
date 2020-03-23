@@ -71,6 +71,19 @@
 				</tr>
 			</tbody>
 		</table>
+		<nav aria-label="Page navigation example">
+		<ul class="pagination">
+			<li class="page-item" :class="{'disabled': paginaActual === 1}">
+				<router-link :to="{query:{pagina: paginaActual-1}}" class="page-link" href="#">Anterior</router-link>
+			</li>
+			<li class="page-item" :class="{'active':paginaActual === index+1}" v-for="(item, index) in cantidadPaginas" :key="index">
+				<router-link :to="{query:{pagina:index+1}}" class="page-link" href="#">{{ index + 1 }}</router-link>
+			</li>
+			<li class="page-item" :class="{'disabled': paginaActual === cantidadPaginas}">
+				<router-link :to="{query:{pagina: paginaActual+1}}" class="page-link" href="#">Siguiente</router-link>
+			</li>
+		</ul>
+		</nav>
 	</div>
 </template>
 <script>
@@ -78,6 +91,9 @@
 	export default {
 		data(){
 			return {
+				totalNotas: 0,
+				limite: 5,
+				paginaActual: 1,
 				notas: [],
 				dismissSecs: 5,
         		dismissCountDown: 0,
@@ -88,12 +104,40 @@
 			}
 		},
 		computed: {
-			...mapState(['token'])
+			...mapState(['token']),
+			cantidadPaginas(){
+				return Math.ceil(this.totalNotas / this.limite)
+			}
 		},
-		created(){
+		/*created(){
 			this.listarNotas();
+		},*/
+		watch: {
+			"$route.query.pagina":{
+				immediate:true,
+				handler(pagina){
+					pagina = parseInt(pagina) || 1;
+					this.paginacion(pagina);
+					this.paginaActual = pagina;
+				}
+			}
 		},
 		methods: {
+			paginacion(pagina){
+				let config = {
+					headers:{
+						token: this.token
+					}
+				}
+				let skip = (pagina -1) * this.limite;
+				this.axios.get(`/nota?limite=${this.limite}&skip=${skip}`, config)
+				.then(res => {
+					this.notas = res.data.notaDB;
+					this.totalNotas = res.data.totalNotas;
+				}).catch(e => {
+					console.log(e.response);
+				})
+			},
 			listarNotas(){
 				let config = {
 					headers:{
@@ -103,7 +147,7 @@
 				this.axios.get('/nota', config)
 				.then(res => {
 					//console.log(res);
-					this.notas = res.data;
+					this.notas = res.data.notaDB;
 				}).catch(e => {
 					console.log(e.response);
 				})
