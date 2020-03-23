@@ -7,9 +7,9 @@ const app = express();
 //Conection to base de datos mongo db
 const mongoose = require('mongoose');
 //Conexión LOCAL
-const uri = 'mongodb://localhost:27017/udemymevn';
+//const uri = 'mongodb://localhost:27017/udemymevn';
 //Conexión en la nube
-//const uri = 'mongodb+srv://user_mevn:Ja2JecSNQ3SkVyXC@mevn-9zteq.mongodb.net/mevn?retryWrites=true&w=majority';
+const uri = 'mongodb+srv://user_mevn:Ja2JecSNQ3SkVyXC@mevn-9zteq.mongodb.net/mevn?retryWrites=true&w=majority';
 
 const options = {
   useNewUrlParser: true,
@@ -38,7 +38,7 @@ app.use(express.urlencoded({ extended: true }));
 });*/
 app.use ('/api', require('./routes/nota'));
 app.use ('/api', require('./routes/user'));
-app.use ('/login', require('./routes/login'));
+app.use ('/api/login', require('./routes/login'));
 // Middleware para vue.js router mode history
 const history = require('connect-history-api-fallback')
 app.use(history())
