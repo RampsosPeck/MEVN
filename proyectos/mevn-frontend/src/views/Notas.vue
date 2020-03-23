@@ -45,7 +45,7 @@
 		      	</b-input>
 		    </b-input-group>
 		    <b-button variant="info" type="submit">AGREGAR</b-button>
-		</b-form>
+		</b-form> <hr>
 		<table class="table">
 			<thead>
 				<tr>
@@ -74,6 +74,7 @@
 	</div>
 </template>
 <script>
+	import { mapState } from "vuex"
 	export default {
 		data(){
 			return {
@@ -86,12 +87,20 @@
         		notaEditar: {}
 			}
 		},
+		computed: {
+			...mapState(['token'])
+		},
 		created(){
 			this.listarNotas();
 		},
 		methods: {
 			listarNotas(){
-				this.axios.get('/nota')
+				let config = {
+					headers:{
+						token: this.token
+					}
+				}
+				this.axios.get('/nota', config)
 				.then(res => {
 					//console.log(res);
 					this.notas = res.data;
@@ -100,8 +109,13 @@
 				})
 			},
 			agregarNota(){
+				let config = {
+					headers:{
+						token: this.token
+					}
+				}
 				//console.log(this.nota)
-				this.axios.post('/nueva-nota', this.nota)
+				this.axios.post('/nueva-nota', this.nota, config)
 				.then(res => {
 					this.notas.push(res.data)
 					this.nota.nombre = ''
