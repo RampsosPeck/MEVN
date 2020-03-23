@@ -17,7 +17,7 @@
 	export default {
 		data() {
 			return {
-				usuario:{email:'cinco@gmail.com', pass:'holamundo'},
+				usuario:{email:'', pass:''},
 				mensaje: ''
 			}
 		},
